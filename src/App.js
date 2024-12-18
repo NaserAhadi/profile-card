@@ -1,5 +1,33 @@
 import "./App.css";
 
+const skills = [
+  {
+    skill: "JavaScript",
+    level: "upper-intermediate",
+    color: "yellow",
+  },
+  {
+    skill: "Vue.js",
+    level: "upper-intermediate",
+    color: "green",
+  },
+  {
+    skill: "Git and Github",
+    level: "intermediate",
+    color: "red",
+  },
+  {
+    skill: "React",
+    level: "beginner",
+    color: "cadetblue",
+  },
+  {
+    skill: "HTML+CSS",
+    level: "intermediate",
+    color: "blue",
+  },
+];
+
 function App() {
   return (
     <div className="container">
@@ -32,20 +60,36 @@ function Description() {
 }
 
 function SkillsList() {
+  let calEmoji = function (level) {
+    switch (level) {
+      case "advanced":
+        return "👌";
+      case "upper-intermediate":
+        return "👍";
+      case "intermediate":
+        return "🙌";
+      case "beginner":
+        return "🤓";
+      default:
+        break;
+    }
+  };
   return (
     <div className="skills-list">
-      <Skill color="blue" skill="HTML+CSS" emoji="🤓" />
-      <Skill color="yellow" skill="JavaScript" emoji="🙌" />
-      <Skill color="red" skill="Git and Github" emoji="👌" />
-      <Skill color="cadetblue" skill="React" emoji="👍" />
+      {skills.map((item) => (
+        <Skill
+          skill={item.skill}
+          color={item.color}
+          emoji={calEmoji(item.level)}
+        />
+      ))}
     </div>
   );
 }
-function Skill(props) {
+function Skill({ skill, color, emoji }) {
   return (
-    <div className="skill" style={{ backgroundColor: props.color }}>
-      <span style={{ marginRight: "4px" }}>{props.skill}</span>{" "}
-      <span>{props.emoji}</span>
+    <div className="skill" style={{ backgroundColor: color }}>
+      <span style={{ marginRight: "4px" }}>{skill}</span> <span>{emoji}</span>
     </div>
   );
 }
